@@ -1,0 +1,13 @@
+<button (click)="clickMenu()"><mat-icon>more_vert</mat-icon></button>
+<div *ngIf="bShowMenu">
+    <ul *ngFor="let item of dataMenuChildrens">
+        <li *ngIf="item.parentId == null">
+            <a >{{item.name}}</a>
+            <ul *ngFor="let itemSub of dataMenuChildrens.children">
+                <li >
+                    <a>{{itemSub.name}}</a>
+                </li>
+            </ul>
+        </li>
+    </ul>
+</div>
