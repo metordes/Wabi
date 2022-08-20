@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { element } from 'protractor';
 import { DataService } from 'src/app/services/data.service';
 import { ItemMenu } from 'src/app/shared/interfaces';
 
@@ -13,6 +14,7 @@ export class MenuComponent implements OnInit {
   public bShowMenu = false;
   public dataMenuChildrens: any;
   public bShowSubMenu = false;
+  public childrens: ItemMenu;
   constructor(
     private sData: DataService
   ) { }
@@ -25,9 +27,10 @@ export class MenuComponent implements OnInit {
   clickMenu() {
     this.bShowMenu = !this.bShowMenu;
   }
-  showSubMenu(id){
-    this.bShowSubMenu = true;
+  showChildrens(childrens){
+    this.childrens = childrens;
   }
+
   private getDataMenu() {
     this.dataMenu = this.sData.getData();
   }
@@ -40,9 +43,8 @@ export class MenuComponent implements OnInit {
       }
     });
     this.dataMenu.forEach(elem => {
-      this.addChildren(elem, this.dataMenuChildrens)
+      this.addChildren(elem, this.dataMenuChildrens);
     });
-    console.log('Children', this.dataMenuChildrens);
   }
 
   private addChildren(elem, children) {
